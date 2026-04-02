@@ -61,6 +61,13 @@ export default {
 					light: '#E8C97A',
 					dark: '#8B6914',
 				},
+				burgundy: {
+					DEFAULT: '#7B1D3A',
+					light: '#A62650',
+					dark: '#4D0E22',
+					muted: '#5C1429',
+				},
+				'rose-gold': '#C4748A',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

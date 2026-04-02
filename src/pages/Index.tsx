@@ -162,12 +162,16 @@ export default function Index() {
             style={{ background: "radial-gradient(circle, #C9A84C 0%, transparent 70%)", filter: "blur(60px)" }} />
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-8"
             style={{ background: "radial-gradient(circle, #8B6914 0%, transparent 70%)", filter: "blur(80px)" }} />
+          <div className="absolute top-1/3 right-1/3 w-72 h-72 rounded-full opacity-15"
+            style={{ background: "radial-gradient(circle, #7B1D3A 0%, transparent 70%)", filter: "blur(70px)" }} />
+          <div className="absolute bottom-1/3 left-1/3 w-64 h-64 rounded-full opacity-12"
+            style={{ background: "radial-gradient(circle, #A62650 0%, transparent 70%)", filter: "blur(90px)" }} />
         </div>
 
         {[...Array(12)].map((_, i) => (
           <div key={i} className="absolute w-1 h-1 rounded-full"
             style={{
-              background: "#C9A84C",
+              background: i % 3 === 0 ? "#A62650" : i % 3 === 1 ? "#C9A84C" : "#E8C97A",
               left: `${10 + i * 7.5}%`,
               bottom: `${20 + (i % 4) * 15}%`,
               animation: `particle-rise ${3 + i * 0.4}s ease-out infinite`,
