@@ -56,18 +56,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				gold: {
-					DEFAULT: '#C9A84C',
-					light: '#E8C97A',
-					dark: '#8B6914',
+				crimson: {
+					DEFAULT: '#8B0000',
+					light: '#B22222',
+					dark: '#5C0000',
+					muted: '#6B0000',
 				},
-				burgundy: {
-					DEFAULT: '#7B1D3A',
-					light: '#A62650',
-					dark: '#4D0E22',
-					muted: '#5C1429',
+				cream: {
+					DEFAULT: '#FAF7F4',
+					dark: '#F0EBE4',
 				},
-				'rose-gold': '#C4748A',
+				ink: '#1A1A1A',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
