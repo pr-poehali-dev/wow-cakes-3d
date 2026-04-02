@@ -109,6 +109,8 @@ export default function Index() {
     { id: "home", label: "Главная" },
     { id: "portfolio", label: "Портфолио" },
     { id: "services", label: "Услуги" },
+    { id: "macarons", label: "Макарон" },
+    { id: "masterclass", label: "Обучение" },
     { id: "about", label: "О мастере" },
     { id: "reviews", label: "Отзывы" },
     { id: "contact", label: "Заказ" },
@@ -479,6 +481,375 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* ===== MACARONS 3D + BOXES ===== */}
+      <section id="macarons" className="py-24 px-8 md:px-16 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-8"
+            style={{ background: "radial-gradient(circle, #7B1D3A 0%, transparent 65%)", filter: "blur(100px)" }} />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-6"
+            style={{ background: "radial-gradient(circle, #C9A84C 0%, transparent 65%)", filter: "blur(80px)" }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="reveal text-center mb-16">
+            <p className="font-montserrat text-[10px] tracking-[0.4em] text-[#A62650] mb-4 uppercase">Авторские пирожные</p>
+            <h2 className="font-cormorant text-white/90" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 300 }}>
+              Макарон <em className="gold-text">ручной работы</em>
+            </h2>
+            <p className="font-montserrat text-sm text-white/40 mt-4 max-w-lg mx-auto leading-relaxed" style={{ fontWeight: 300 }}>
+              Французские пирожные с авторскими начинками. Нежные, хрустящие, тающие во рту.
+            </p>
+          </div>
+
+          {/* 3D Macaron viewer */}
+          <div className="reveal grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div className="relative">
+              <div
+                className="relative aspect-square overflow-hidden gold-glow"
+                style={{ transition: "transform 0.15s ease" }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+                  const y = ((e.clientY - rect.top) / rect.height - 0.5) * -15;
+                  e.currentTarget.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) scale(1.02)`;
+                }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "perspective(900px) rotateX(0) rotateY(0) scale(1)"; }}
+              >
+                <img
+                  src="https://cdn.poehali.dev/projects/d87778a0-f9ce-465d-8715-3914d6075b70/files/264e6c7c-aa9a-4899-b1a2-7e2315e63a31.jpg"
+                  alt="Макарон"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0"
+                  style={{ background: "linear-gradient(135deg, rgba(77,14,34,0.3) 0%, transparent 60%)" }} />
+                {/* 3D label */}
+                <div className="absolute top-5 left-5 border border-[#A62650]/60 px-3 py-1 backdrop-blur-sm"
+                  style={{ background: "rgba(77,14,34,0.5)" }}>
+                  <span className="font-montserrat text-[9px] tracking-widest text-[#C4748A] uppercase">3D просмотр</span>
+                </div>
+                {/* Flavor tags */}
+                <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
+                  {["Малина", "Фисташка", "Шоколад", "Лаванда", "Карамель", "Ваниль"].map((f) => (
+                    <span key={f} className="font-montserrat text-[8px] tracking-wider uppercase px-2 py-1"
+                      style={{ background: "rgba(77,14,34,0.7)", border: "1px solid rgba(196,116,138,0.3)", color: "#E8C97A" }}>
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {/* Decorative dots */}
+              <div className="absolute -right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-1.5 h-1.5 rounded-full"
+                    style={{ background: i % 2 === 0 ? "#A62650" : "#C9A84C", opacity: 0.6 }} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="font-montserrat text-[10px] tracking-[0.3em] text-[#A62650] uppercase mb-5">6 вкусов сезона</p>
+              <h3 className="font-cormorant text-white/90 mb-6" style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", fontWeight: 300 }}>
+                Каждый — маленький<br /><em className="gold-text">шедевр</em>
+              </h3>
+              <div className="space-y-4 mb-8">
+                {[
+                  { flavor: "Малина & Роза", desc: "Нежный ганаш из малины с лепестками роз", color: "#A62650" },
+                  { flavor: "Фисташка & Бурбон", desc: "Итальянская фисташковая паста, нотки ванили", color: "#6B8C4E" },
+                  { flavor: "Тёмный шоколад", desc: "Горький Valrhona 72%, морская соль", color: "#5C3A1E" },
+                  { flavor: "Лаванда & Мёд", desc: "Прованская лаванда, цветочный мёд Алтая", color: "#7B6FA0" },
+                ].map((item) => (
+                  <div key={item.flavor} className="flex items-start gap-4 group">
+                    <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-transform group-hover:scale-150"
+                      style={{ background: item.color }} />
+                    <div>
+                      <p className="font-montserrat text-sm text-white/80 font-medium">{item.flavor}</p>
+                      <p className="font-montserrat text-xs text-white/35 mt-0.5" style={{ fontWeight: 300 }}>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="font-montserrat text-xs text-white/30 mb-6" style={{ fontWeight: 300 }}>
+                Вкусы меняются сезонно. Всегда доступны 8–12 позиций на выбор.
+              </p>
+              <button onClick={() => document.getElementById("macaron-boxes")?.scrollIntoView({ behavior: "smooth" })}
+                className="btn-ghost-gold">
+                Выбрать бокс
+              </button>
+            </div>
+          </div>
+
+          {/* ===== BOX CATALOG ===== */}
+          <div id="macaron-boxes">
+            <div className="reveal text-center mb-10">
+              <p className="font-montserrat text-[10px] tracking-[0.4em] text-[#A62650] mb-3 uppercase">Каталог боксов</p>
+              <h3 className="font-cormorant text-white/90" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 300 }}>
+                Готовые <em className="gold-text">подарочные боксы</em>
+              </h3>
+            </div>
+
+            <div className="reveal grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  count: 6,
+                  name: "Мини-бокс",
+                  price: "890 ₽",
+                  desc: "Идеально для знакомства с вкусами. Элегантная коробочка с 6 пирожными на выбор.",
+                  flavors: "3–4 вкуса",
+                  tag: "Знакомство",
+                  popular: false,
+                },
+                {
+                  count: 8,
+                  name: "Классик",
+                  price: "1 190 ₽",
+                  desc: "Самый популярный формат. Разнообразие вкусов, красивое оформление, золотая лента.",
+                  flavors: "4–6 вкусов",
+                  tag: "Хит продаж",
+                  popular: true,
+                },
+                {
+                  count: 12,
+                  name: "Люкс-бокс",
+                  price: "1 690 ₽",
+                  desc: "Премиальный подарок. Весь сезонный ассортимент в одной коробке. Бархатная упаковка.",
+                  flavors: "6–8 вкусов",
+                  tag: "Премиум",
+                  popular: false,
+                },
+              ].map((box) => (
+                <div key={box.count}
+                  className={`relative overflow-hidden transition-all duration-500 group ${box.popular ? "ring-1 ring-[#A62650]" : ""}`}
+                  style={{
+                    background: box.popular
+                      ? "linear-gradient(135deg, rgba(77,14,34,0.6), rgba(123,29,58,0.3), rgba(17,17,17,0.9))"
+                      : "linear-gradient(135deg, rgba(17,17,17,0.95), rgba(30,10,15,0.8))",
+                    border: box.popular ? "none" : "1px solid rgba(123,29,58,0.2)",
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+                    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+                    e.currentTarget.style.transform = `perspective(800px) rotateX(${y}deg) rotateY(${x}deg) translateZ(10px)`;
+                  }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateZ(0)"; }}
+                >
+                  {/* Top line animation */}
+                  <div className="absolute top-0 left-0 w-0 h-px group-hover:w-full transition-all duration-700"
+                    style={{ background: "linear-gradient(90deg, #7B1D3A, #C9A84C)" }} />
+
+                  {box.popular && (
+                    <div className="absolute top-4 right-4 px-3 py-1"
+                      style={{ background: "linear-gradient(135deg, #7B1D3A, #A62650)" }}>
+                      <span className="font-montserrat text-[8px] tracking-widest text-white uppercase">{box.tag}</span>
+                    </div>
+                  )}
+
+                  <div className="p-8">
+                    {/* Box image area */}
+                    <div className="relative aspect-[4/3] mb-6 overflow-hidden">
+                      <img
+                        src="https://cdn.poehali.dev/projects/d87778a0-f9ce-465d-8715-3914d6075b70/files/083e5456-bb15-4027-ba51-dd9edd1c1922.jpg"
+                        alt={`Бокс ${box.count} макарон`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0"
+                        style={{ background: "linear-gradient(to top, rgba(77,14,34,0.8) 0%, transparent 50%)" }} />
+                      {/* Count badge */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-baseline gap-1">
+                        <span className="font-cormorant text-5xl font-light"
+                          style={{ color: "#E8C97A", textShadow: "0 0 20px rgba(201,168,76,0.5)" }}>
+                          {box.count}
+                        </span>
+                        <span className="font-montserrat text-xs text-white/60 uppercase tracking-widest">шт</span>
+                      </div>
+                    </div>
+
+                    <div className="mb-1 flex items-center justify-between">
+                      <h4 className="font-cormorant text-xl text-white group-hover:text-[#E8C97A] transition-colors">
+                        {box.name}
+                      </h4>
+                      {!box.popular && (
+                        <span className="font-montserrat text-[8px] tracking-widest text-[#A62650]/70 uppercase border border-[#A62650]/20 px-2 py-0.5">
+                          {box.tag}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="font-montserrat text-[10px] tracking-widest text-[#C4748A] uppercase mb-4">{box.flavors}</p>
+                    <p className="font-montserrat text-xs text-white/40 leading-relaxed mb-6" style={{ fontWeight: 300 }}>{box.desc}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="font-cormorant text-3xl font-light" style={{ color: "#C9A84C" }}>{box.price}</span>
+                      </div>
+                      <button className="btn-ghost-gold py-2 px-5 text-[9px]">
+                        Заказать
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="reveal text-center mt-8">
+              <p className="font-montserrat text-xs text-white/30 mb-4" style={{ fontWeight: 300 }}>
+                Возможна индивидуальная сборка бокса · Доставка по Пензе · Минимальный заказ 6 шт.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="gold-line mx-16 my-2 reveal" />
+
+      {/* ===== ОБУЧЕНИЕ ===== */}
+      <section id="masterclass" className="py-24 px-8 md:px-16 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full opacity-5"
+            style={{ background: "radial-gradient(ellipse, #7B1D3A 0%, transparent 70%)", filter: "blur(80px)" }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto">
+          <div className="reveal grid md:grid-cols-2 gap-16 items-center">
+            {/* Left — text */}
+            <div>
+              <p className="font-montserrat text-[10px] tracking-[0.4em] text-[#A62650] mb-5 uppercase">Мастер-классы</p>
+              <h2 className="font-cormorant text-white/90 mb-6" style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", fontWeight: 300 }}>
+                Научись готовить<br /><em className="gold-text">макарон</em>
+              </h2>
+              <p className="font-montserrat text-sm text-white/50 leading-relaxed mb-8" style={{ fontWeight: 300 }}>
+                Поля лично проведёт тебя от теории до готового пирожного.
+                Узнаешь все секреты идеальных «ножек», правильный ганаш и авторские начинки.
+              </p>
+
+              {/* Program */}
+              <div className="space-y-3 mb-10">
+                {[
+                  { step: "01", title: "Теория и ингредиенты", desc: "Разбираем миндальную муку, меренгу, температурный режим" },
+                  { step: "02", title: "Замес и отсадка", desc: "Техника макаронажа, работа с кондитерским мешком" },
+                  { step: "03", title: "Выпечка и сборка", desc: "Контроль духовки, правильная склейка, начинки" },
+                  { step: "04", title: "Декор и упаковка", desc: "Роспись, посыпки, оформление в подарочный бокс" },
+                ].map((item) => (
+                  <div key={item.step} className="flex gap-5 items-start group">
+                    <span className="font-cormorant text-2xl font-light flex-shrink-0 mt-0.5 transition-colors group-hover:text-[#A62650]"
+                      style={{ color: "rgba(201,168,76,0.4)" }}>
+                      {item.step}
+                    </span>
+                    <div>
+                      <p className="font-montserrat text-sm text-white/80 font-medium">{item.title}</p>
+                      <p className="font-montserrat text-xs text-white/30 mt-0.5" style={{ fontWeight: 300 }}>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Formats */}
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[
+                  { format: "Мини-группа", count: "до 4 чел", price: "3 500 ₽" },
+                  { format: "Группа", count: "до 8 чел", price: "2 800 ₽" },
+                  { format: "Онлайн", count: "без лимита", price: "1 500 ₽" },
+                ].map((f) => (
+                  <div key={f.format} className="text-center p-4 border border-[#7B1D3A]/30 hover:border-[#A62650]/60 transition-colors"
+                    style={{ background: "rgba(77,14,34,0.15)" }}>
+                    <p className="font-montserrat text-[9px] tracking-widest text-[#C4748A] uppercase mb-1">{f.format}</p>
+                    <p className="font-montserrat text-[10px] text-white/40 mb-2" style={{ fontWeight: 300 }}>{f.count}</p>
+                    <p className="font-cormorant text-xl text-[#C9A84C]">{f.price}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex -space-x-2">
+                  {["#7B1D3A", "#A62650", "#C4748A"].map((c, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0A0A0A] flex items-center justify-center"
+                      style={{ background: c }}>
+                      <span className="text-white text-[10px]">★</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="font-montserrat text-xs text-white/40" style={{ fontWeight: 300 }}>
+                  Уже прошли обучение <span className="text-[#C9A84C]">47 учеников</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Right — form */}
+            <div className="relative">
+              {/* Photo behind */}
+              <div className="absolute inset-0 rounded-none overflow-hidden opacity-20"
+                style={{ transform: "translate(16px, 16px)" }}>
+                <img
+                  src="https://cdn.poehali.dev/projects/d87778a0-f9ce-465d-8715-3914d6075b70/files/ea299511-4ef5-4be5-9916-697b256aa497.jpg"
+                  alt="Обучение"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Form card */}
+              <div className="relative p-8 border border-[#7B1D3A]/40"
+                style={{ background: "linear-gradient(135deg, rgba(77,14,34,0.5), rgba(17,10,12,0.95))", backdropFilter: "blur(10px)" }}>
+                <div className="absolute top-0 left-0 right-0 h-px"
+                  style={{ background: "linear-gradient(90deg, transparent, #A62650, #C9A84C, transparent)" }} />
+
+                <h3 className="font-cormorant text-2xl text-white mb-1">Записаться на мастер-класс</h3>
+                <p className="font-montserrat text-xs text-white/30 mb-7 tracking-wide" style={{ fontWeight: 300 }}>
+                  Ближайшая дата: <span className="text-[#C4748A]">уточняется</span>
+                </p>
+
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label className="font-montserrat text-[9px] tracking-widest text-[#A62650]/80 uppercase block mb-2">Ваше имя</label>
+                    <input type="text" placeholder="Анастасия"
+                      className="w-full px-4 py-3 font-montserrat text-sm text-white/80 placeholder-white/20 focus:outline-none transition-colors"
+                      style={{ background: "rgba(10,10,10,0.6)", border: "1px solid rgba(123,29,58,0.4)" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(166,38,80,0.8)")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(123,29,58,0.4)")} />
+                  </div>
+                  <div>
+                    <label className="font-montserrat text-[9px] tracking-widest text-[#A62650]/80 uppercase block mb-2">Телефон</label>
+                    <input type="tel" placeholder="+7 (900) 000-00-00"
+                      className="w-full px-4 py-3 font-montserrat text-sm text-white/80 placeholder-white/20 focus:outline-none transition-colors"
+                      style={{ background: "rgba(10,10,10,0.6)", border: "1px solid rgba(123,29,58,0.4)" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(166,38,80,0.8)")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(123,29,58,0.4)")} />
+                  </div>
+                  <div>
+                    <label className="font-montserrat text-[9px] tracking-widest text-[#A62650]/80 uppercase block mb-2">Формат</label>
+                    <select
+                      className="w-full px-4 py-3 font-montserrat text-sm text-white/60 focus:outline-none transition-colors"
+                      style={{ background: "rgba(10,10,10,0.8)", border: "1px solid rgba(123,29,58,0.4)" }}>
+                      <option className="bg-[#0A0A0A]">Мини-группа (до 4 чел) — 3 500 ₽</option>
+                      <option className="bg-[#0A0A0A]">Группа (до 8 чел) — 2 800 ₽</option>
+                      <option className="bg-[#0A0A0A]">Онлайн-формат — 1 500 ₽</option>
+                      <option className="bg-[#0A0A0A]">Индивидуальное обучение</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-montserrat text-[9px] tracking-widest text-[#A62650]/80 uppercase block mb-2">Пожелания</label>
+                    <textarea rows={3} placeholder="Есть ли опыт, что хочется освоить..."
+                      className="w-full px-4 py-3 font-montserrat text-sm text-white/80 placeholder-white/20 focus:outline-none transition-colors resize-none"
+                      style={{ background: "rgba(10,10,10,0.6)", border: "1px solid rgba(123,29,58,0.4)" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(166,38,80,0.8)")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(123,29,58,0.4)")} />
+                  </div>
+                  <button type="submit" className="btn-gold w-full">
+                    Записаться на мастер-класс
+                  </button>
+                </form>
+
+                <p className="font-montserrat text-[9px] text-white/20 text-center mt-4 tracking-wide">
+                  После заявки Поля свяжется с вами в течение 2 часов
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="gold-line mx-16 my-2 reveal" />
 
       {/* ===== FOOTER ===== */}
       <footer className="border-t border-[#C9A84C]/10 py-10 px-8 md:px-16">
